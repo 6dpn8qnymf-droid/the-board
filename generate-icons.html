@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+  Open this file in any browser to generate the app icons.
+  It will download the PNGs automatically — put them in public/icons/
+-->
+<html>
+<body>
+<script>
+function makeIcon(size, filename) {
+  const canvas = document.createElement('canvas')
+  canvas.width = size
+  canvas.height = size
+  const ctx = canvas.getContext('2d')
+
+  // Background
+  ctx.fillStyle = '#1E293B'
+  roundRect(ctx, 0, 0, size, size, size * 0.22)
+  ctx.fill()
+
+  // Trophy emoji
+  ctx.font = `${size * 0.55}px serif`
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'middle'
+  ctx.fillText('🏆', size / 2, size / 2)
+
+  canvas.toBlob(blob => {
+    const a = document.createElement('a')
+    a.href = URL.createObjectURL(blob)
+    a.download = filename
+    a.click()
+  })
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath()
+  ctx.moveTo(x + r, y)
+  ctx.lineTo(x + w - r, y)
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r)
+  ctx.lineTo(x + w, y + h - r)
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h)
+  ctx.lineTo(x + r, y + h)
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r)
+  ctx.lineTo(x, y + r)
+  ctx.quadraticCurveTo(x, y, x + r, y)
+  ctx.closePath()
+}
+
+// Badge (72x72, simple circle)
+function makeBadge() {
+  const canvas = document.createElement('canvas')
+  canvas.width = 72; canvas.height = 72
+  const ctx = canvas.getContext('2d')
+  ctx.fillStyle = '#1E293B'
+  ctx.beginPath(); ctx.arc(36, 36, 36, 0, Math.PI * 2); ctx.fill()
+  ctx.font = '40px serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'
+  ctx.fillText('🏆', 36, 36)
+  canvas.toBlob(blob => {
+    const a = document.createElement('a')
+    a.href = URL.createObjectURL(blob); a.download = 'badge-72.png'; a.click()
+  })
+}
+
+setTimeout(() => makeIcon(192, 'icon-192.png'), 100)
+setTimeout(() => makeIcon(512, 'icon-512.png'), 600)
+setTimeout(() => makeBadge(), 1100)
+
+document.body.innerHTML = '<p style="font-family:sans-serif;padding:20px">Downloading 3 icon files... Put them in your <strong>public/icons/</strong> folder.</p>'
+</script>
+</body>
+</html>

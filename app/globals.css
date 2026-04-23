@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: #F8FAFC;
+  overscroll-behavior: none;
+}
+
+/* Prevent bounce scroll on iOS at the body level */
+body {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#app-scroll {
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Bottom nav safe area */
+.pb-safe {
+  padding-bottom: calc(4rem + var(--safe-area-bottom));
+}
+
+.bottom-nav-height {
+  height: calc(4rem + var(--safe-area-bottom));
+}
