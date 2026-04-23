@@ -165,7 +165,7 @@ export async function submitSnapshot(input: SnapshotInput): Promise<{ success?: 
         .limit(1)
         .maybeSingle()
 
-      const prevBest = bestRow ? (bestRow as Record<string, number>)[deltaCol] ?? 0 : 0
+      const prevBest = bestRow ? (bestRow as unknown as Record<string, number>)[deltaCol] ?? 0 : 0
       if (prevBest > 0 && delta > prevBest) {
         const next = cat === 'aum' ? newAum : cat === 'fee_revenue_ytd' ? newFee : newCont
         events.push({
