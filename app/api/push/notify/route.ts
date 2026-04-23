@@ -1,14 +1,8 @@
 import webpush from 'web-push'
 import { NextResponse } from 'next/server'
-import { CATEGORY_LABELS, PERSON_MAP } from '@/lib/constants'
+import { CATEGORY_LABELS } from '@/lib/constants'
 import { formatCurrency, formatDelta } from '@/lib/utils'
 import type { Category, EventType } from '@/types'
-
-webpush.setVapidDetails(
-  process.env.VAPID_SUBJECT!,
-  process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
-  process.env.VAPID_PRIVATE_KEY!
-)
 
 interface EventPayload {
   event_type: EventType
@@ -56,6 +50,12 @@ function buildNotification(event: EventPayload, triggeredBy: string): { title: s
 
 export async function POST(request: Request) {
   try {
+    webpush.setVapidDetails(
+      process.env.VAPID_SUBJECT!,
+      process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
+      process.env.VAPID_PRIVATE_KEY!
+    )
+
     const { subscription, events, triggeredBy } = await request.json()
     if (!subscription || !events?.length) {
       return NextResponse.json({ error: 'Missing data' }, { status: 400 })
