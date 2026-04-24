@@ -9,8 +9,12 @@ export async function GET(request: Request) {
   if (code) {
     const supabase = await createServerClient()
     const { error } = await supabase.auth.exchangeCodeForSession(code)
+
     if (!error) {
-      // Check if profile exists; if not, send to setup
+      // On Vercel the internal request.url host differs from the public host
+      const forwardedHost = request.headers.get('x-forwarded-host')
+      const redirectBase = forwardedHost ? `https://${forwardedHost}` : origin
+
       const { data: { user } } = await supabase.auth.getUser()
       if (user) {
         const { data: profile } = await supabase
@@ -20,12 +24,15 @@ export async function GET(request: Request) {
           .maybeSingle()
 
         if (!profile) {
-          return NextResponse.redirect(`${origin}/setup`)
+          return NextResponse.redirect(`${redirectBase}/setup`)
         }
       }
-      return NextResponse.redirect(`${origin}${next}`)
+
+      return NextResponse.redirect(`${redirectBase}${next}`)
     }
   }
 
-  return NextResponse.redirect(`${origin}/login?error=auth_failed`)
+  const forwardedHost = request.headers.get('x-forwarded-host')
+  const redirectBase = forwardedHost ? `https://${forwardedHost}` : origin
+  return NextResponse.redirect(`${redirectBase}/login?error=auth_failed`)
 }
