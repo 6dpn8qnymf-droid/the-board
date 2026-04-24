@@ -95,7 +95,7 @@ export default function UpdateForm({ profile, prevSnapshot }: Props) {
       <div className="flex flex-col items-center justify-center py-16 gap-3">
         <div className="text-5xl">✅</div>
         <p className="font-semibold text-slate-900">Update posted!</p>
-        <p className="text-sm text-slate-400">Heading back to the board…</p>
+        <p className="text-sm text-slate-400">Heading back…</p>
       </div>
     )
   }

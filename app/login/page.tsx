@@ -65,7 +65,7 @@ export default function LoginPage() {
       <div className="w-full max-w-sm">
         <div className="text-center mb-10">
           <div className="text-5xl mb-4">🏆</div>
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">The Board</h1>
+          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Slingaz Numbaz</h1>
           <p className="mt-2 text-slate-500 text-sm">Track the competition</p>
         </div>
 

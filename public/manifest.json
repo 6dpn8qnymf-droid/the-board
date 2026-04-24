@@ -1,6 +1,6 @@
 {
-  "name": "The Board",
-  "short_name": "Board",
+  "name": "Slingaz Numbaz",
+  "short_name": "Slingaz",
   "description": "Track the competition",
   "start_url": "/",
   "display": "standalone",

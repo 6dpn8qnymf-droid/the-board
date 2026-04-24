@@ -44,7 +44,7 @@ function buildNotification(event: EventPayload, triggeredBy: string): { title: s
       }
     }
     default:
-      return { title: 'The Board', body: `${triggeredBy} posted an update` }
+      return { title: 'Slingaz Numbaz', body: `${triggeredBy} posted an update` }
   }
 }
 

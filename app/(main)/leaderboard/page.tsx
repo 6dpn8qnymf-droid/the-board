@@ -56,7 +56,7 @@ export default async function LeaderboardPage() {
     <div className="px-4 pt-6">
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
-        <h1 className="text-2xl font-bold text-slate-900 tracking-tight">The Board</h1>
+        <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Slingaz Numbaz</h1>
         <span className="text-2xl">🏆</span>
       </div>
 
